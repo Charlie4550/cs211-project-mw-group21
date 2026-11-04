@@ -1,1 +1,1 @@
-# cs211-project-mw-groupBlackJack
+Team Blackjack/ 2048 and Luhn's programs 
