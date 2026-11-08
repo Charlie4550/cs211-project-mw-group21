@@ -1,0 +1,59 @@
+
+#include "2048_helper.h"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+void print_board(int board[BOARD_SIZE][BOARD_SIZE])
+{
+    for (int r = 0; r < BOARD_SIZE; r++)
+    {
+        for (int c = 0; c < BOARD_SIZE; c++)
+        {
+            cout << board[r][c] << "\t";
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    srand(time(0));
+
+    int board[BOARD_SIZE][BOARD_SIZE] =
+    {
+        {2, 0, 4, 0, 0},
+        {0, 2, 0, 0, 0},
+        {4, 0, 0, 2, 0},
+        {0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0}
+    };
+
+    cout << "BEFORE ADDING TILE:\n";
+    print_board(board);
+
+    bool added = add_random_tile(board);
+
+    cout << "\nAFTER ADDING TILE:\n";
+    print_board(board);
+
+    cout << "\nTile successfully added: " << added << endl;
+
+    // Test a completely full board.
+    int fullBoard[BOARD_SIZE][BOARD_SIZE] =
+    {
+        {2, 4, 8, 16, 32},
+        {4, 8, 16, 32, 64},
+        {8, 16, 32, 64, 128},
+        {16, 32, 64, 128, 256},
+        {32, 64, 128, 256, 512}
+    };
+
+    bool fullBoardResult = add_random_tile(fullBoard);
+
+    cout << "Full board accepted new tile: "
+         << fullBoardResult << endl;
+
+    return 0;
+}
