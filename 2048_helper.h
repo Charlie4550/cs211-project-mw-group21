@@ -11,4 +11,6 @@ bool move_right(int board[BOARD_SIZE][BOARD_SIZE], int& scoreGained);
 
 bool move_up(int board[BOARD_SIZE][BOARD_SIZE], int& scoreGained);
 
+bool move_down(int board[BOARD_SIZE][BOARD_SIZE], int& scoreGained);
+
 #endif
