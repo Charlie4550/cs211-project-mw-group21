@@ -13,4 +13,6 @@ bool move_up(int board[BOARD_SIZE][BOARD_SIZE], int& scoreGained);
 
 bool move_down(int board[BOARD_SIZE][BOARD_SIZE], int& scoreGained);
 
+bool add_random_tile(int board[BOARD_SIZE][BOARD_SIZE]);
+
 #endif
