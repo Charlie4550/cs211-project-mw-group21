@@ -1,4 +1,5 @@
 #include "2048_helper.h"
+#include <cstdlib>
 
 void process_row_left(int row[BOARD_SIZE], int& scoreGained)
 {
