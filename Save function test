@@ -1,0 +1,50 @@
+
+#include "2048_helper.h"
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    // Create a test 5x5 game board.
+    int board[BOARD_SIZE][BOARD_SIZE] =
+    {
+        {2, 4, 8, 16, 32},
+        {0, 2, 4, 8, 16},
+        {0, 0, 2, 4, 8},
+        {0, 0, 0, 2, 4},
+        {0, 0, 0, 0, 2}
+    };
+
+    // Set a test score.
+    int totalScore = 120;
+
+    cout << "BEFORE SAVING:" << endl;
+
+    // Display the board.
+    for (int r = 0; r < BOARD_SIZE; r++)
+    {
+        for (int c = 0; c < BOARD_SIZE; c++)
+        {
+            cout << board[r][c] << "\t";
+        }
+
+        cout << endl;
+    }
+
+    cout << "\nCurrent score: " << totalScore << endl;
+
+    // Attempt to save the game.
+    bool saved = save_game(board, totalScore);
+
+    if (saved)
+    {
+        cout << "\nGame saved successfully!" << endl;
+    }
+    else
+    {
+        cout << "\nError saving game." << endl;
+    }
+
+    return 0;
+}
