@@ -2,6 +2,8 @@
 #include <cstdlib>
 #include <fstream>
 
+using namespace std;
+
 void process_row_left(int row[BOARD_SIZE], int& scoreGained)
 {
     int compacted[BOARD_SIZE] = {0, 0, 0, 0, 0};
