@@ -409,3 +409,30 @@ bool check_game_over(int board[BOARD_SIZE][BOARD_SIZE])
     // No empty spaces or possible merges remain.
     return true;
 }
+bool save_game(int board[BOARD_SIZE][BOARD_SIZE], int totalScore)
+{
+    ofstream saveFile("savegame.txt");
+
+    if (!saveFile)
+    {
+        return false;
+    }
+
+    // Save the player's score.
+    saveFile << totalScore << endl;
+
+    // Save all 25 board positions.
+    for (int r = 0; r < BOARD_SIZE; r++)
+    {
+        for (int c = 0; c < BOARD_SIZE; c++)
+        {
+            saveFile << board[r][c] << " ";
+        }
+
+        saveFile << endl;
+    }
+
+    saveFile.close();
+
+    return true;
+}
