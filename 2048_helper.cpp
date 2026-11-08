@@ -315,3 +315,49 @@ bool move_down(int board[BOARD_SIZE][BOARD_SIZE],
 
     return boardChanged;
 }
+
+bool add_random_tile(int board[BOARD_SIZE][BOARD_SIZE])
+{
+    int emptyCount = 0;
+
+    // Count all empty spaces.
+    for (int r = 0; r < BOARD_SIZE; r++)
+    {
+        for (int c = 0; c < BOARD_SIZE; c++)
+        {
+            if (board[r][c] == 0)
+            {
+                emptyCount++;
+            }
+        }
+    }
+
+    // No empty spaces available.
+    if (emptyCount == 0)
+    {
+        return false;
+    }
+
+    // Select a random empty space.
+    int randomPosition = rand() % emptyCount;
+
+    // Find that empty space and place a 2.
+    for (int r = 0; r < BOARD_SIZE; r++)
+    {
+        for (int c = 0; c < BOARD_SIZE; c++)
+        {
+            if (board[r][c] == 0)
+            {
+                if (randomPosition == 0)
+                {
+                    board[r][c] = 2;
+                    return true;
+                }
+
+                randomPosition--;
+            }
+        }
+    }
+
+    return false;
+}
