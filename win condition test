@@ -1,0 +1,27 @@
+
+#include "2048_helper.h"
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int testBoard[BOARD_SIZE][BOARD_SIZE] =
+    {
+        {2, 4, 8, 16, 32},
+        {4, 8, 16, 32, 64},
+        {8, 16, 32, 64, 128},
+        {16, 32, 64, 128, 256},
+        {32, 64, 128, 256, 2048}
+    };
+
+    cout << "Winning board: "
+         << check_win(testBoard) << endl;
+
+    // Change the winning tile to 1024.
+    testBoard[4][4] = 1024;
+
+    cout << "Non-winning board: "
+         << check_win(testBoard) << endl;
+
+    return 0;
+}
