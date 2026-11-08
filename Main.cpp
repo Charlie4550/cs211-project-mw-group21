@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+
 using namespace std;
 
 // Displays the game board.
@@ -43,6 +44,7 @@ int main()
 
     cout << "===== 2048 GAME =====\n";
     cout << "Use W, A, S, D to move.\n";
+    cout << "Use P to save your game.\n";
     cout << "Use Q to quit.\n";
 
     while (true)
@@ -53,15 +55,32 @@ int main()
         cout << "Enter move: ";
         cin >> command;
 
+        // Quit the game.
         if (command == 'q' || command == 'Q')
         {
             cout << "Thanks for playing!\n";
             break;
         }
 
+        // Save the current game.
+        if (command == 'p' || command == 'P')
+        {
+            if (save_game(board, totalScore))
+            {
+                cout << "Game saved successfully!\n";
+            }
+            else
+            {
+                cout << "Error saving game.\n";
+            }
+
+            continue;
+        }
+
         scoreGained = 0;
         changed = false;
 
+        // Process the player's movement.
         switch (command)
         {
             case 'a':
@@ -90,43 +109,42 @@ int main()
         }
 
         // Add a new tile only after a successful move.
-        
-if (changed)
-{
-    totalScore += scoreGained;
+        if (changed)
+        {
+            totalScore += scoreGained;
 
-    // Check whether the player has won.
-    if (check_win(board))
-    {
-        print_board(board);
-        cout << "Congratulations! You reached 2048!\n";
-        cout << "Final score: " << totalScore << endl;
-        break;
+            // Check whether the player has won.
+            if (check_win(board))
+            {
+                print_board(board);
+                cout << "Congratulations! You reached 2048!\n";
+                cout << "Final score: " << totalScore << endl;
+                break;
+            }
+
+            add_random_tile(board);
+        }
+
+        // Check whether the game is over.
+        if (check_game_over(board))
+        {
+            print_board(board);
+            cout << "GAME OVER! No more moves available.\n";
+            cout << "Final score: " << totalScore << endl;
+            break;
+        }
+
+        // Tell the player when a move was unsuccessful.
+        if (!changed &&
+            (command == 'a' || command == 'A' ||
+             command == 'd' || command == 'D' ||
+             command == 'w' || command == 'W' ||
+             command == 's' || command == 'S'))
+        {
+            cout << "That move did not change the board.\n";
+        }
     }
 
-    // Add a new tile after a successful move.
-    add_random_tile(board);
+    return 0;
 }
 
-// Check whether the game is over.
-if (check_game_over(board))
-{
-    print_board(board);
-    cout << "GAME OVER! No more moves available.\n";
-    cout << "Final score: " << totalScore << endl;
-    break;
-}
-if (!changed &&
-    (command == 'a' || command == 'A' ||
-     command == 'd' || command == 'D' ||
-     command == 'w' || command == 'W' ||
-     command == 's' || command == 'S'))
-{
-    cout << "That move did not change the board.\n";
-}
-
-// End of the game loop.
-}
-
-return 0;
-}
