@@ -90,20 +90,40 @@ int main()
         }
 
         // Add a new tile only after a successful move.
-        if (changed)
+        
+if (changed)
+{
+    totalScore += scoreGained;
+
+    // Check whether the player has won.
+    if (check_win(board))
+    {
+        print_board(board);
+        cout << "Congratulations! You reached 2048!\n";
+        cout << "Final score: " << totalScore << endl;
+        break;
+    }
+
+    // Add a new tile after a successful move.
+    add_random_tile(board);
+}
+
+// Check whether the game is over.
+if (check_game_over(board))
+{
+    print_board(board);
+    cout << "GAME OVER! No more moves available.\n";
+    cout << "Final score: " << totalScore << endl;
+    break;
+}
+if (!changed &&
+    (command == 'a' || command == 'A' ||
+     command == 'd' || command == 'D' ||
+     command == 'w' || command == 'W' ||
+     command == 's' || command == 'S'))
         {
-            totalScore += scoreGained;
-            add_random_tile(board);
-        }
-        else
-        {
-            if (command == 'a' || command == 'A' ||
-                command == 'd' || command == 'D' ||
-                command == 'w' || command == 'W' ||
-                command == 's' || command == 'S')
-            {
-                cout << "That move did not change the board.\n";
-            }
+           cout << "That move did not change the board.\n";
+}
         }
     }
 
