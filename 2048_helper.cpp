@@ -362,3 +362,18 @@ bool add_random_tile(int board[BOARD_SIZE][BOARD_SIZE])
 
     return false;
 }
+bool check_win(int board[BOARD_SIZE][BOARD_SIZE])
+{
+    for (int r = 0; r < BOARD_SIZE; r++)
+    {
+        for (int c = 0; c < BOARD_SIZE; c++)
+        {
+            if (board[r][c] >= 2048)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
