@@ -377,3 +377,35 @@ bool check_win(int board[BOARD_SIZE][BOARD_SIZE])
 
     return false;
 }
+
+bool check_game_over(int board[BOARD_SIZE][BOARD_SIZE])
+{
+    for (int r = 0; r < BOARD_SIZE; r++)
+    {
+        for (int c = 0; c < BOARD_SIZE; c++)
+        {
+            // An empty space means the game is not over.
+            if (board[r][c] == 0)
+            {
+                return false;
+            }
+
+            // Check the tile to the right.
+            if (c < BOARD_SIZE - 1 &&
+                board[r][c] == board[r][c + 1])
+            {
+                return false;
+            }
+
+            // Check the tile below.
+            if (r < BOARD_SIZE - 1 &&
+                board[r][c] == board[r + 1][c])
+            {
+                return false;
+            }
+        }
+    }
+
+    // No empty spaces or possible merges remain.
+    return true;
+}
