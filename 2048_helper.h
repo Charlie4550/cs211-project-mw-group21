@@ -7,4 +7,6 @@ const int BOARD_SIZE = 5;
 // Returns true if the board changed and stores the points earned in scoreGained.
 bool move_left(int board[BOARD_SIZE][BOARD_SIZE], int& scoreGained);
 
+bool move_right(int board[BOARD_SIZE][BOARD_SIZE], int& scoreGained);
+
 #endif
