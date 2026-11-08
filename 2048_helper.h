@@ -19,4 +19,6 @@ bool check_win(int board[BOARD_SIZE][BOARD_SIZE]);
 
 bool check_game_over(int board[BOARD_SIZE][BOARD_SIZE]);
 
+bool save_game(int board[BOARD_SIZE][BOARD_SIZE], int totalScore);
+
 #endif
