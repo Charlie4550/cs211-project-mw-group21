@@ -17,4 +17,6 @@ bool add_random_tile(int board[BOARD_SIZE][BOARD_SIZE]);
 
 bool check_win(int board[BOARD_SIZE][BOARD_SIZE]);
 
+bool check_game_over(int board[BOARD_SIZE][BOARD_SIZE]);
+
 #endif
