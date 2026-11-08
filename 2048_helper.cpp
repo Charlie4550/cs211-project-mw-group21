@@ -439,3 +439,35 @@ bool save_game(int board[BOARD_SIZE][BOARD_SIZE], int totalScore)
 
     return true;
 }
+
+bool load_game(int board[BOARD_SIZE][BOARD_SIZE], int& totalScore)
+{
+    ifstream saveFile("savegame.txt");
+
+    if (!saveFile)
+    {
+        return false;
+    }
+
+    // Load the saved score.
+    if (!(saveFile >> totalScore))
+    {
+        return false;
+    }
+
+    // Load all 25 board positions.
+    for (int r = 0; r < BOARD_SIZE; r++)
+    {
+        for (int c = 0; c < BOARD_SIZE; c++)
+        {
+            if (!(saveFile >> board[r][c]))
+            {
+                return false;
+            }
+        }
+    }
+
+    saveFile.close();
+
+    return true;
+}
