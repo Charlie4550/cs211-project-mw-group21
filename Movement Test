@@ -1,0 +1,42 @@
+#include "2048_helper.h"
+#include <iostream>
+using namespace std;
+
+void print_board(int board[BOARD_SIZE][BOARD_SIZE])
+{
+    for (int r = 0; r < BOARD_SIZE; r++)
+    {
+        for (int c = 0; c < BOARD_SIZE; c++)
+        {
+            cout << board[r][c] << "\t";
+        }
+        cout << endl;
+    }
+}
+
+int main()
+{
+    int board[BOARD_SIZE][BOARD_SIZE] =
+    {
+        {2, 0, 2, 2, 0},
+        {2, 2, 2, 2, 2},
+        {4, 4, 8, 8, 0},
+        {2, 4, 8, 0, 0},
+        {0, 0, 0, 0, 0}
+    };
+
+    int scoreGained = 0;
+
+    cout << "BEFORE MOVEMENT:\n";
+    print_board(board);
+
+    bool changed = move_down(board, scoreGained);
+
+    cout << "\nAFTER MOVEMENT:\n";
+    print_board(board);
+
+    cout << "\nScore gained: " << scoreGained << endl;
+    cout << "Board changed: " << changed << endl;
+
+    return 0;
+}
