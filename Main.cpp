@@ -121,11 +121,12 @@ if (!changed &&
      command == 'd' || command == 'D' ||
      command == 'w' || command == 'W' ||
      command == 's' || command == 'S'))
-        {
-           cout << "That move did not change the board.\n";
+{
+    cout << "That move did not change the board.\n";
 }
-        }
-    }
 
-    return 0;
+// End of the game loop.
+}
+
+return 0;
 }
