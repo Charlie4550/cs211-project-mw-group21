@@ -6,7 +6,6 @@
 
 using namespace std;
 
-// Displays the game board.
 void print_board(int board[BOARD_SIZE][BOARD_SIZE])
 {
     cout << "\n";
@@ -34,7 +33,6 @@ int main()
     int board[BOARD_SIZE][BOARD_SIZE] = {0};
     int totalScore = 0;
 
-    // Start the game with two random tiles.
     add_random_tile(board);
     add_random_tile(board);
 
@@ -45,6 +43,7 @@ int main()
     cout << "===== 2048 GAME =====\n";
     cout << "Use W, A, S, D to move.\n";
     cout << "Use P to save your game.\n";
+    cout << "Use L to load your saved game.\n";
     cout << "Use Q to quit.\n";
 
     while (true)
@@ -55,24 +54,31 @@ int main()
         cout << "Enter move: ";
         cin >> command;
 
-        // Quit the game.
+        // Quit the game
         if (command == 'q' || command == 'Q')
         {
             cout << "Thanks for playing!\n";
             break;
         }
 
-        // Save the current game.
+        // Save the current game
         if (command == 'p' || command == 'P')
         {
             if (save_game(board, totalScore))
-            {
                 cout << "Game saved successfully!\n";
-            }
             else
-            {
                 cout << "Error saving game.\n";
-            }
+
+            continue;
+        }
+
+        // Load a previously saved game
+        if (command == 'l' || command == 'L')
+        {
+            if (load_game(board, totalScore))
+                cout << "Game loaded successfully!\n";
+            else
+                cout << "No saved game found or loading failed.\n";
 
             continue;
         }
@@ -80,7 +86,7 @@ int main()
         scoreGained = 0;
         changed = false;
 
-        // Process the player's movement.
+        // Process movement commands
         switch (command)
         {
             case 'a':
@@ -108,12 +114,11 @@ int main()
                 break;
         }
 
-        // Add a new tile only after a successful move.
+        // Update the game after a successful move
         if (changed)
         {
             totalScore += scoreGained;
 
-            // Check whether the player has won.
             if (check_win(board))
             {
                 print_board(board);
@@ -125,7 +130,7 @@ int main()
             add_random_tile(board);
         }
 
-        // Check whether the game is over.
+        // Check whether any moves remain
         if (check_game_over(board))
         {
             print_board(board);
@@ -134,7 +139,7 @@ int main()
             break;
         }
 
-        // Tell the player when a move was unsuccessful.
+        // Explain when a valid direction does not change the board
         if (!changed &&
             (command == 'a' || command == 'A' ||
              command == 'd' || command == 'D' ||
@@ -147,4 +152,3 @@ int main()
 
     return 0;
 }
-
