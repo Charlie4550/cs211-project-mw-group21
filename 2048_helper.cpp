@@ -235,3 +235,83 @@ bool move_up(int board[BOARD_SIZE][BOARD_SIZE],
 
     return boardChanged;
 }
+
+void process_column_down(int board[BOARD_SIZE][BOARD_SIZE],
+                         int column, int& scoreGained)
+{
+    int compacted[BOARD_SIZE] = {0, 0, 0, 0, 0};
+    int nextPosition = BOARD_SIZE - 1;
+
+    // Move nonzero numbers toward the bottom.
+    for (int i = BOARD_SIZE - 1; i >= 0; i--)
+    {
+        if (board[i][column] != 0)
+        {
+            compacted[nextPosition] = board[i][column];
+            nextPosition--;
+        }
+    }
+
+    // Merge matching neighbors once.
+    for (int i = BOARD_SIZE - 1; i > 0; i--)
+    {
+        if (compacted[i] != 0 &&
+            compacted[i] == compacted[i - 1])
+        {
+            compacted[i] *= 2;
+            scoreGained += compacted[i];
+            compacted[i - 1] = 0;
+            i--;
+        }
+    }
+
+    // Close gaps created by merging.
+    int finalColumn[BOARD_SIZE] = {0, 0, 0, 0, 0};
+    nextPosition = BOARD_SIZE - 1;
+
+    for (int i = BOARD_SIZE - 1; i >= 0; i--)
+    {
+        if (compacted[i] != 0)
+        {
+            finalColumn[nextPosition] = compacted[i];
+            nextPosition--;
+        }
+    }
+
+    // Copy the finished column back.
+    for (int i = 0; i < BOARD_SIZE; i++)
+    {
+        board[i][column] = finalColumn[i];
+    }
+}
+
+bool move_down(int board[BOARD_SIZE][BOARD_SIZE],
+               int& scoreGained)
+{
+    scoreGained = 0;
+    bool boardChanged = false;
+
+    for (int c = 0; c < BOARD_SIZE; c++)
+    {
+        int originalColumn[BOARD_SIZE];
+
+        // Save the original column.
+        for (int r = 0; r < BOARD_SIZE; r++)
+        {
+            originalColumn[r] = board[r][c];
+        }
+
+        process_column_down(board, c, scoreGained);
+
+        // Check whether the column changed.
+        for (int r = 0; r < BOARD_SIZE; r++)
+        {
+            if (board[r][c] != originalColumn[r])
+            {
+                boardChanged = true;
+            }
+        }
+    }
+
+    return boardChanged;
+}
