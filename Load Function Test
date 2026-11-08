@@ -1,0 +1,60 @@
+
+#include "2048_helper.h"
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int originalBoard[BOARD_SIZE][BOARD_SIZE] =
+    {
+        {2, 4, 8, 16, 32},
+        {0, 2, 4, 8, 16},
+        {0, 0, 2, 4, 8},
+        {0, 0, 0, 2, 4},
+        {0, 0, 0, 0, 2}
+    };
+
+    int originalScore = 120;
+
+    cout << "Saving test game..." << endl;
+
+    bool saved = save_game(originalBoard, originalScore);
+
+    if (!saved)
+    {
+        cout << "Save failed!" << endl;
+        return 1;
+    }
+
+    // Create an empty board to load into.
+    int loadedBoard[BOARD_SIZE][BOARD_SIZE] = {0};
+    int loadedScore = 0;
+
+    cout << "Loading test game..." << endl;
+
+    bool loaded = load_game(loadedBoard, loadedScore);
+
+    if (loaded)
+    {
+        cout << "\nGame loaded successfully!" << endl;
+        cout << "Loaded score: " << loadedScore << endl;
+
+        cout << "\nLoaded board:" << endl;
+
+        for (int r = 0; r < BOARD_SIZE; r++)
+        {
+            for (int c = 0; c < BOARD_SIZE; c++)
+            {
+                cout << loadedBoard[r][c] << "\t";
+            }
+
+            cout << endl;
+        }
+    }
+    else
+    {
+        cout << "Loading failed!" << endl;
+    }
+
+    return 0;
+}
