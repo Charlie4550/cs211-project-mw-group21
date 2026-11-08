@@ -1,0 +1,33 @@
+
+#include "2048_helper.h"
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    int gameOverBoard[BOARD_SIZE][BOARD_SIZE] =
+    {
+        {2, 4, 2, 4, 2},
+        {4, 2, 4, 2, 4},
+        {2, 4, 2, 4, 2},
+        {4, 2, 4, 2, 4},
+        {2, 4, 2, 4, 2}
+    };
+
+    int playableBoard[BOARD_SIZE][BOARD_SIZE] =
+    {
+        {2, 2, 4, 8, 16},
+        {4, 8, 16, 32, 64},
+        {8, 16, 32, 64, 128},
+        {16, 32, 64, 128, 256},
+        {32, 64, 128, 256, 512}
+    };
+
+    cout << "Game-over board: "
+         << check_game_over(gameOverBoard) << endl;
+
+    cout << "Playable board: "
+         << check_game_over(playableBoard) << endl;
+
+    return 0;
+}
